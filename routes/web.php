@@ -2,15 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CountryController;
-use App\Http\Controllers\ClubController;
+use App\Http\Controllers\FootballClubController;
+use App\Http\Controllers\StatsController;
 
-// Перенаправлення з головної сторінки на список клубів (або країн)
 Route::get('/', function () {
     return redirect()->route('clubs.index');
 });
 
-// Ресурсний маршрут для країн (Case 3)
+// Маршрути лабораторної 3
 Route::resource('country', CountryController::class);
+Route::resource('clubs', FootballClubController::class);
 
-// Ресурсний маршрут для клубів (Індивідуальне завдання)
-Route::resource('clubs', ClubController::class);
+// Маршрути лабораторної 4 (Статистика)
+Route::get('/stats', [StatsController::class, 'pages'])->name('stats.pages');
+Route::get('/stats/detail', [StatsController::class, 'detail'])->name('stats.detail');
+Route::get('/stats/clubs', [StatsController::class, 'clubStats'])->name('stats.clubs');
+
+// Сторінка контактів
+Route::view('/contacts', 'contacts')->name('contacts');

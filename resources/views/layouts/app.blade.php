@@ -13,8 +13,10 @@
     <div class="container">
         <a class="navbar-brand fw-bold" href="{{ route('clubs.index') }}">⚽ УПЛ Довідник</a>
         <div class="navbar-nav">
-            <a class="nav-link" href="{{ route('country.index') }}">Країни</a>
-            <a class="nav-link active" href="{{ route('clubs.index') }}">Футбольні клуби</a>
+            <a class="nav-link {{ request()->routeIs('country.*') ? 'active' : '' }}" href="{{ route('country.index') }}">Країни</a>
+            <a class="nav-link {{ request()->routeIs('clubs.*') ? 'active' : '' }}" href="{{ route('clubs.index') }}">Футбольні клуби</a>
+            <a class="nav-link {{ request()->routeIs('stats.*') ? 'active' : '' }}" href="{{ route('stats.pages') }}">Статистика</a>
+            <a class="nav-link {{ request()->routeIs('contacts') ? 'active' : '' }}" href="{{ route('contacts') }}">Контакти</a>
         </div>
     </div>
 </nav>
