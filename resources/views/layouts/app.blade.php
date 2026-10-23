@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'ФК "Локомотив" — Спортивний Клуб')</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Довідник')</title>
+    <!-- Підключення Bootstrap 5 через CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa;">
-
-<!-- Головне меню спортивного клубу -->
-<nav style="background-color: #1a252f; padding: 15px 30px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-    <div style="color: #e74c3c; font-size: 20px; font-weight: bold; letter-spacing: 1px;">
-        ⚽ ФК «ЛОКОМОТИВ»
-    </div>
-    <div>
-        <a href="{{ url('/') }}" style="color: white; margin-right: 20px; text-decoration: none; font-weight: bold;">Головна</a>
-        <a href="{{ url('/teams') }}" style="color: #ecf0f1; margin-right: 20px; text-decoration: none;">Команди</a>
-        <a href="{{ url('/matches') }}" style="color: #ecf0f1; margin-right: 20px; text-decoration: none;">Матчі та Турніри</a>
-        <a href="{{ url('/news') }}" style="color: #ecf0f1; margin-right: 20px; text-decoration: none;">Новини</a>
-        <a href="{{ url('/contacts') }}" style="color: #ecf0f1; text-decoration: none;">Контакти</a>
+<body class="bg-light">
+<!-- Навігаційна панель (Navbar) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ route('clubs.index') }}">⚽ УПЛ Довідник</a>
+        <div class="navbar-nav">
+            <a class="nav-link {{ request()->routeIs('country.*') ? 'active' : '' }}" href="{{ route('country.index') }}">Країни</a>
+            <a class="nav-link {{ request()->routeIs('clubs.*') ? 'active' : '' }}" href="{{ route('clubs.index') }}">Футбольні клуби</a>
+            <a class="nav-link {{ request()->routeIs('stats.*') ? 'active' : '' }}" href="{{ route('stats.pages') }}">Статистика</a>
+            <a class="nav-link {{ request()->routeIs('contacts') ? 'active' : '' }}" href="{{ route('contacts') }}">Контакти</a>
+        </div>
     </div>
 </nav>
 
 <!-- Основний контент -->
-<main style="padding: 40px 20px; min-height: 400px; max-width: 1100px; margin: 0 auto;">
+<div class="container bg-white p-4 rounded shadow-sm">
+    <!-- Flash-повідомлення -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
     @yield('content')
-</main>
+</div>
 
-<!-- Підвал (Footer) спортивного клубу -->
-<footer style="background-color: #1a252f; border-top: 3px solid #e74c3c; color: #bdc3c7; padding: 25px 20px; text-align: center;">
-    <div style="margin-bottom: 10px; font-weight: bold; color: white;">
-        Спортивний клуб ФК «Локомотив»
-    </div>
-    <p style="font-size: 14px; margin: 5px 0;">
-        Офіційний портал команди та спортивної секції.
-    </p>
-    <div style="margin-top: 15px; font-size: 13px; color: #7f8c8d;">
-        &copy; {{ date('Y') }} Усі права захищено | Розробив: Кузьменко Владислав (Група РС-42)
-    </div>
-</footer>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
